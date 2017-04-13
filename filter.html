@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-app="app">
+<div ng-controller="box">
+    uppercase:格式化字符串为大写
+    currency:格式化数字为货币格式
+    
+    <input type="text" ng-model="text">
+    {{text | uppercase}}
+    <ol>
+        <li ng-repeat="i in data">{{i}}</li>
+    </ol>
+</div>
+<script src="js/angular.js"></script>
+<script>
+    var app=angular.module('app',[]);
+    app.controller('box',function($scope){
+        $scope.data=[1,2,3,4,5,6,7]
+    })
+</script>
+</body>
+</html>

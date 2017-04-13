@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="jquery.js"></script>
+<script>
+    console.log($.Deferred())
+    function delay(time,info){
+        var dfd=new $.Deferred()
+        setTimeout(function(){
+            console.log(' hello hello hello')
+            //返回
+            dfd.resolve(info)
+            //dfd.reject('我闷闷哒')
+        },time)
+        return dfd.promise()
+    }
+   var fn= delay(2000,'我想我是蒙逼的')
+    /*fn.done(function(info){
+        console.log(info)
+    })*/
+//    fn.fail(function(info){
+//        console.log(info)
+//    })
+//    fn.always(function(info){
+//        console.log(info)
+//    })
+    var fn2=fn.then(function(info){
+        console.log(info);
+        return delay(5000,'懵逼+1')
+    })
+    fn2.then(function(info){
+        console.log(info)
+    })
+    console.log(new $.Deferred())
+</script>
+</body>
+</html>

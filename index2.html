@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="jquery.js"></script>
+<script>
+    //并行
+$.when($.ajax('data/list1.json'), $.ajax('data/list2.json')).done(
+        function(list1,list2){
+            console.log(list1[0]);
+            console.log(list2[0]);
+            var data1=list1[0];
+            var data2=list2[0];
+            document.write(data1.code+','+data2.code)
+        }
+)
+//串行请求
+var req1= $.ajax('data/list1.json');
+var req2=req1.then(function(data){
+    //当请求1完成之后，在成功回调里返回新的请求
+    return $.ajax('data/list2.json');
+})
+req2.done(function(data){
+    console.log(data)
+})
+//$.ajax('data/list1.json')
+//        .then(function(data){
+//            document.write(data.code)
+//        })
+//var d1,d2;
+//$.ajax({
+//    url:'data/list1.json',
+//    success:function(data){
+//        d1=data.code
+//        $.ajax({
+//            url:'data/list2.json',
+//            success:function(data){
+//                d2=data.code
+//                document.write(d1+','+d2)
+//            }
+//        })
+//    }
+//})
+
+
+</script>
+</body>
+</html>
